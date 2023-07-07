@@ -1,0 +1,16 @@
+name: Bump Helm Chart
+description: bumps a helm chart version from a github release
+inputs:
+  path:
+    description: Path to the chart folder
+    required: true
+  release:
+    description: The release tag to use as appVersion
+    required: true
+  branch:
+    description: The branch to commit and push to
+    required: false
+outputs: {}
+runs:
+  using: 'node12'
+  main: 'index.js'
