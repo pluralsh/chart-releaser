@@ -40,6 +40,7 @@ async function run() {
 }
 
 async function setupGit() {
+  await exec.exec(`git config http.sslVerify false`)
   await exec.exec(`git config user.name "Plural Releaser Bot"`)
   await exec.exec(`git config user.email "<>"`)
 }
@@ -51,7 +52,7 @@ function gitUrl() {
 async function push(branch, vsn) {
   await exec.exec(`git add .`)
   await exec.exec(`git commit -m "publishing chart for version ${vsn}"`)
-  await exec.exec(`git push ${gitUrl()} ${branch}`)
+  await exec.exec(`git push ${gitUrl()} HEAD:${branch}`)
 }
 
 run();
