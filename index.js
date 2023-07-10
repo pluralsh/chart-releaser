@@ -44,10 +44,14 @@ async function setupGit() {
   await exec.exec(`git config user.email "<>"`)
 }
 
+function gitUrl() {
+  return `https://${process.env.GITHUB_ACTOR}:${core.getInput("github-token")}@github.com/${process.env.GITHUB_REPOSITORY}.git`
+}
+
 async function push(branch, vsn) {
   await exec.exec(`git add .`)
   await exec.exec(`git commit -m "publishing chart for version ${vsn}"`)
-  await exec.exec(`git push origin ${branch}`)
+  await exec.exec(`git push ${gitUrl()} ${branch}`)
 }
 
 run();
